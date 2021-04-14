@@ -352,6 +352,7 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
+    CarrierConfigOverlay \
     libril-wrapper \
     librmnetctl
 
