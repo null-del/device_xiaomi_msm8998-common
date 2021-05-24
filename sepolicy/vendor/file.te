@@ -5,11 +5,3 @@ type fingerprint_sysfs, sysfs_type, fs_type;
 # Thermal engine
 type thermal_data_file, data_file_type, file_type;
 type thermal_decrypt_file, core_data_file_type, data_file_type, file_type;
-
-# Power HAL
-type debugfs_rpm, fs_type, debugfs_type;
-type sysfs_msm_subsys, fs_type, sysfs_type;
-type sysfs_power_stats, fs_type, sysfs_type;
-
-# DT2W
-type proc_touchpanel, fs_type, proc_type;
