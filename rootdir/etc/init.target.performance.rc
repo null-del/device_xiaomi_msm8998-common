@@ -5,10 +5,6 @@ service vendor.qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     oneshot
 
 on init
-    # Disable UFS powersaving
-    write /sys/devices/soc/1da4000.ufshc/clkscale_enable 0
-    write /sys/devices/soc/1da4000.ufshc/clkgate_enable 0
-
     # Disable thermal bcl hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
 
@@ -25,10 +21,6 @@ on init
     # Setup governor
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "schedutil"
-
-    # Set min freqs
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 300000
 
     # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
@@ -128,10 +120,6 @@ on property:sys.boot_completed=1
     write /dev/stune/schedtune.prefer_idle 0
     write /dev/stune/schedtune.boost 0
 
-    # Enable UFS powersaving
-    write /sys/devices/soc/1da4000.ufshc/clkscale_enable 1
-    write /sys/devices/soc/1da4000.ufshc/clkgate_enable 1
-
     # Post-boot fs tuning
     write /sys/block/sda/queue/iostats 1
     write /sys/block/sda/queue/nr_requests 128
@@ -146,7 +134,6 @@ on property:sys.boot_completed=1
     write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
-    write /dev/cpuset/camera-daemon/cpus 0-3
 
     # Run post poot script
     start vendor.qcom-post-boot
